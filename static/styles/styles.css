@@ -1,0 +1,76 @@
+.flashcardnote {
+    position: relative;
+    border: none;  /* 1px dotted gray;  don't think a border is needed */
+    display: inline-block; /* if you want this container to shrink-to-fit */
+}
+.flashcardnote img {
+    display: block;
+    /* max-width: 50%; maybe see about user resizing and shifting text area acordingly. 
+    max-height: 50%*/
+    
+} 
+.flashcardnote textarea {
+    position: absolute;
+    top: 2.5%;
+    left: 2.5%;
+    /* height: 200px;
+    width: 200px; */ 
+    height: 95%;
+    width: 95%;
+    text-align: center;
+    font-family: cursive;
+    font-weight: bolder;
+    font-size: 30px;
+    /* margin: auto */
+    background-color: rgba(255,255,255,0); /*a = alpha or opacitiy of just the background, 0 for completely transparent*/
+    border: none; /*1px solid blue; /* you can style the border too */
+    outline: none;
+}
+
+
+/*stolen and modified from https://codepen.io/magnificode/pen/rQpaBO 
+This is how I got around doing an image of a note card and basically just created my 
+own by taking this "paper style" and shrinking it with no holes to make it look like a flash card */
+:root {
+    --margin-line: #941c5a;
+    --lines: #1d97b8;
+}
+
+/* html,
+/* body {
+    background-color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    min-height: 100%;
+} */ 
+
+.flashFront {
+    width: 500px;
+    height: 300px;
+    background-color: #fff;
+    background-image: linear-gradient(var(--lines) 0.05em, transparent 0.05em);
+    background-size: 100% 2em;
+    position: relative;
+    box-shadow: 45px 45px 33px rgba(27, 27, 27, 1);
+    border: 1px solid gray;
+}
+
+
+.flashFront textarea {
+    position: absolute;
+    top: 2rem;
+    left: 3rem;
+    width: calc(100% - 5rem);
+    height: calc(100% - 7rem);
+    background-color: transparent;
+    border: none;
+    font-family: cursive;
+    font-size: 2rem;
+    line-height: 1;
+    padding-left: 1rem;
+    margin: 0;
+    resize: none;
+    /* outline: none; */
+}
