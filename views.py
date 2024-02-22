@@ -45,13 +45,14 @@ def home():
 
             return redirect("/")                #This is to facilitate(I hope) post-redirect-get design to stop accidental duplicates upon browser refresh
 
-    rettitle, retdata, retdata2 = "", "", ""        #This is to allow for placeholder text or the fetched flash card text
+    f_title, f_data, f_data2, f_deck_title = "", "", "", ""        #This is to allow for placeholder text or the fetched flash card text
     if fetched_flash.title:
-        rettitle = fetched_flash.title
-        retdata = fetched_flash.data
-        retdata2 = fetched_flash.data2
+        f_title = fetched_flash.title
+        f_data = fetched_flash.data
+        f_data2 = fetched_flash.data2
+        f_deck_title = fetched_flash.deck_title
 
-    return render_template("home.html", user = current_user, note_title = rettitle, flasha = retdata, flashb = retdata2)
+    return render_template("home.html", user = current_user, flash_title = f_title, flasha = f_data, flashb = f_data2, deck_title = f_deck_title)
 
 #
 # deletes deck and all flashcards.  Will want to change this as to allow a flash card toe xist in multiple decks. 
@@ -64,8 +65,8 @@ def delete_deck():
     deck = Deck.query.get(deckId)
     if deck:
         if deck.user_id == current_user.id:
-            # for flashcard in deck.flashcards:
-            #     db.session.delete(flashcard)
+            for flashcard in deck.flashcards:
+                db.session.delete(flashcard)
             db.session.delete(deck)
             db.session.commit()
     
@@ -88,13 +89,20 @@ def delete_note():
         fetched_flash.title = None           #when we delete a note we don't want to reload the current flash card with previous
     return jsonify({})
 
+@views.route("/fetch-deck", methods = ["POST", "GET"])
+def fetch_deck():
+    showF = json.loads(request.data)
+    # showFl = showF["showFlash"]
+    print(showF)
+    return jsonify({})
 
-@views.route("/fetch-note", methods = ["POST", "GET"])
-def fetch_note():
-    note = json.loads(request.data)
-    noteId = note["noteId"]
-    print(noteId)
-    note = Flashcard.query.get(noteId)
+
+@views.route("/fetch-flash", methods = ["POST", "GET"])
+def fetch_flash():
+    print('hit')
+    flashcard = json.loads(request.data)
+    flashId = flashcard["flashId"]
+    flashcard = Flashcard.query.get(flashId)
     #deck = Deck.query.get(note.user_deck_id)
     # note = json.loads(request.data)
     # noteId = note["noteId"]
@@ -111,9 +119,10 @@ def fetch_note():
     
     # print(jsonify(note.data))
     #return render_template("home.html", user = current_user, test = note.data)  
-    fetched_flash.title = note.title
-    fetched_flash.data = note.data
-    fetched_flash.data2 = note.data2
+    fetched_flash.title = flashcard.title
+    fetched_flash.data = flashcard.data
+    fetched_flash.data2 = flashcard.data2
+    fetched_flash.deck_title = flashcard.deck_title
     
     return jsonify({})
 

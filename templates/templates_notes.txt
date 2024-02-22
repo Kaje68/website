@@ -13,3 +13,8 @@ thigns will still work without it but won't look as nice.
 
 
 https://www.w3schools.com/html/html_form_elements.asp
+
+
+
+
+C:\Users\Kaje\Desktop\Coding and creation\Python Projects\Flask_venv_tutorial\website\templates\website\static\styles\styles.css
