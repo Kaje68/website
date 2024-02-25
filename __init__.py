@@ -20,7 +20,7 @@ def create_app():
     app = Flask(__name__)
 
     #configure the flask application, this can be done through a config file as well
-    app.config["SECRET_KEY"] = "fpwbsl"                     #key used to sign session cookies to protect against data tampering
+    app.config["SECRET_KEY"] = "3141592654"                     #key used to sign session cookies to protect against data tampering
     app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DB_NAME}" 
     
     #initialize(bind) plugin objects to our flask application

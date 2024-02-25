@@ -1,7 +1,8 @@
 
-{% extends "base.html" %} {% block title %}Home{% endblock %} 
+{% extends "base.html" %} {% block title %}KwikFlash{% endblock %} 
     {% block content %}
     <h1 align="center">Kwik Flash cards</h1>
+    <a href="test">Go To Decks</a>
     <!-- <p>{{ test }}</p>
     <p id="demo">first string </p> -->
     <ul class="list-group list-group-flush" id="flashcards">
@@ -36,15 +37,18 @@
         <textarea name="deck_title" id="deck_title" class="important" rows="1" cols="30" placeholder="Deck title required">{{ deck_title }}</textarea>
         <textarea name="flash_title" id="flash_title" class="important" rows="1" cols="30" placeholder="Flashcard title required">{{ flash_title }}</textarea>
         <br />
-        <div id="aside" class="flashcard" >
-          <textarea name="flasha" placeholder="Side A Flash data rquired" >{{ flasha }}</textarea>
-          <flipbutton id="flipa" type="button" class="btn btn-primary" onclick="flipFlash()">Flip</flipbutton>
+        <div class="scene"> <!--  little confused why this is needed but reddit griffin is helping, check bookstack for more notes-->
+          <div class="flashcard" id="flashcard">
+            <div class="card_face front">
+              <textarea name="f_front" placeholder="Front text rquired" >{{ f_front }}</textarea>
+              <button id="flipa" type="button" class=" btn btn-primary" onclick="flipFlash()">Flip</button>
+            </div>
+            <div class="card_face back">
+              <textarea  name="f_back" placeholder="Back text rquired" >{{ f_back }}</textarea>
+              <button id="flipa" type="button" class="btn btn-primary" onclick="flipFlash()">Flip</button>
+            </div>
+          </div>
         </div>
-        <!-- <div id="bside" class="flashcard" style="display: none;">
-          <textarea name="flashb" placeholder="Side B Flash data rquired ">{{flashb}}</textarea>
-          <flipbutton id="flipb" type="button" class="btn btn-primary" onclick="flipFlash()">Flip</flipbutton>
-        </div> -->
-
         <br />
         <button type="reset" class="btn btn-primary">Clear</button>
         <!-- <button id="flip" type="button" class="btn btn-primary" onclick="myFunction()">Flip</button> -->

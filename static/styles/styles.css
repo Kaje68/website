@@ -1,64 +1,46 @@
-.flashcardnote {
-    position: relative;
-    border: none;  /* 1px dotted gray;  don't think a border is needed */
-    display: inline-block; /* if you want this container to shrink-to-fit */
-}
-.flashcardnote img {
-    display: block;
-    /* max-width: 50%; maybe see about user resizing and shifting text area acordingly. 
-    max-height: 50%*/
-    
-} 
-.flashcardnote textarea {
-    position: absolute;
-    top: 2.5%;
-    left: 2.5%;
-    /* height: 200px;
-    width: 200px; */ 
-    height: 95%;
-    width: 95%;
-    text-align: center;
-    font-family: cursive;
-    font-weight: bolder;
-    font-size: 30px;
-    /* margin: auto */
-    background-color: rgba(255,255,255,0); /*a = alpha or opacitiy of just the background, 0 for completely transparent*/
-    border: none; /*1px solid blue; /* you can style the border too */
-    outline: none;
-}
 
 
 /*stolen and modified from https://codepen.io/magnificode/pen/rQpaBO 
 This is how I got around doing an image of a note card and basically just created my 
 own by taking this "paper style" and shrinking it with no holes to make it look like a flash card */
-:root {
-    --margin-line: #941c5a;
-    --lines: #1d97b8;
-}
 
-/* html,
-/* body {
+ /* html,
+ body {
     background-color: #eee;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0;
     min-height: 100%;
-} */ 
+}  */
+/* :root{
+    --margin-line: #941c5a;
+    --lines: #1d97b8;
+} */
+/* body { background-color: #FBFAF5 ; } */
+
+.scene{ /*griffin had this before and I removed it not really understanding why he had it, and still don 't but I needed to add it to make  */
+        /*the transition actually look 3d. I tried simply adding it to .flashcard but it didn't work like it did with other attributes.  */
+    perspective: 1000px;  
+    /* ok from 23schools, When defining the perspective property for an element, it is the CHILD elements that get the perspective view, NOT the element itself. */
+}
 
 .flashcard {
     width: 500px;
     height: 300px;
-    background-color: #fff;
+    background-color: #ffffee;
+    --lines: #1d97b8;
     background-image: linear-gradient(var(--lines) 0.05em, transparent 0.05em);
     background-size: 100% 2em;
     position: relative;
-    box-shadow: 45px 45px 33px rgba(27, 27, 27, 1);
-    border: 1px solid gray;
+    /* border: 1px solid gray; */
+    transition: transform 1s;
+    transform-style: preserve-3d;
+    transform-origin: center center;    
+    /* why does resize only work on textarea? Would be nice for user to be able to resize*/
 }
 
-
-.flashcard textarea {
+.flashcard textarea{
     position: absolute;
     top: 2rem;
     left: 3rem;
@@ -72,27 +54,99 @@ own by taking this "paper style" and shrinking it with no holes to make it look 
     padding-left: 1rem;
     margin: 0;
     resize: none;
-    /* outline: none; */
+    outline: none;
+    /*backface-visibility: hidden;  /* I guess not needed since tied to .flashcard */
+    /* border: 10px solid gray; */
+    
 }
 
-.flashcard flipbutton {
+  /* reddit Griffin has been helping me with my flip animation. https://codepen.io/rgriffinj/pen/NWJVoXG */
+  .card_face {
     position: absolute;
-    /* background-color: #008CBA; 
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center; 
-    text-decoration: none;
-    display: inline-block; 
-    font-size: 16px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    backface-visibility: hidden;
+    text-align: center;
+    font-family: cursive;
+    font-size: 2rem;
+    box-shadow: 45px 45px 33px rgba(27, 27, 27, 1);
+  
+  }
+  
+  .back{
+    transform: rotateY(180deg);
+  }
+
+
+  .flashcard.is-flipped {
+    transform: rotateY(-180deg);
+  }
+  
+  .flashcard button {
+    position: absolute;
+    width: 60px;
     bottom:.5rem;
     right:.5rem;
   }
 
 
+
+/* This is for the user interface buttons*/
+
+
+
+.user_control{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 10px;
+  width: 90%;
+  margin:  auto;
+  text-align: center;
+  /*added to cause everything to center, removed because it broke the temp colums autosize feature above */
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+ 
+
+}
+
+.menu_buttons{
+  height: 150px;
+  width: 200px;
+  background-color: rgb(144, 183, 209);
+  border-radius: 25px;
+  transition: .5s;
+  /*added to cause everything to center*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+    /*doesn't appear to be needed anymore with "flex"*?
+    /* display: inline-block; */
+  /* text-align: center; */
+  /* this centers all the buttons inside the grid */
+  place-self: center;
+  box-shadow: 15px 15px 33px rgba(27, 27, 27, 1);
+}
+.menu_buttons:hover{
+  margin-top: -10px;
+  cursor: pointer;
+  box-shadow: 30px 30px 33px rgba(27, 27, 27, 1); 
+}
+
+
   /* experiments */
 /* Do an horizontal flip when you move the mouse over the flip box container */
-.flashcard:hover textarea{
+/* .flashcard:hover {
     transform: rotateY(180deg);
+    transition: transform 1.8s;
+    transform-style: preserve-3d;
+    perspective: 1000px;
   }
+ */
 

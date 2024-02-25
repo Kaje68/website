@@ -12,6 +12,7 @@ from datetime import datetime
 
 
 
+
 #this file is a blueprint of our application, it has a bunch of *routes* ie url's
 views = Blueprint("views", __name__)     #doesn't have to be name of file but seems to be easier. 
 
@@ -19,11 +20,12 @@ fetched_flash = Flashcard()
 @views.route('/', methods = ["GET", "POST"])       #this is homepage route(url)
 @login_required
 def home():
+    print('hit')
     if request.method == "POST":
         deck_title = request.form.get("deck_title")
         flash_title = request.form.get("flash_title")
-        flasha = request.form.get("flasha")
-        flashb = request.form.get("flashb")
+        flasha = request.form.get("f_front")
+        flashb = request.form.get("f_back")
 
         
         if len(deck_title) < 1:
@@ -52,7 +54,7 @@ def home():
         f_data2 = fetched_flash.data2
         f_deck_title = fetched_flash.deck_title
 
-    return render_template("home.html", user = current_user, flash_title = f_title, flasha = f_data, flashb = f_data2, deck_title = f_deck_title)
+    return render_template("home.html", user = current_user, flash_title = f_title, f_front = f_data, f_back = f_data2, deck_title = f_deck_title)
 
 #
 # deletes deck and all flashcards.  Will want to change this as to allow a flash card toe xist in multiple decks. 
@@ -128,11 +130,17 @@ def fetch_flash():
 
 @views.route('/test', methods=['GET', 'POST'])
 def testfn():
-    # GET request
-    if request.method == 'GET':
-        message = {'greeting':'Hello from Flask!'}
-        return jsonify(message)  # serialize and use JSON headers
-    # POST request
-    if request.method == 'POST':
-        print(request.get_json())  # parse as JSON
-        return 'Sucesss', 200
+    return render_template("test.html", user = current_user, testvar = "it worked")
+#     # GET request
+#     if request.method == 'GET':
+#         message = {'greeting':'Hello from Flask!'}
+#         return jsonify(message)  # serialize and use JSON headers
+#     # POST request
+#     if request.method == 'POST':
+#         print(request.get_json())  # parse as JSON
+#         return 'Sucesss', 200
+#     return redirect("/")    
+
+@views.route('/managedecks', methods=['GET', 'POST'])
+def managedecks():
+    return render_template("managedecks.html", user = current_user)

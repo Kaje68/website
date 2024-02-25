@@ -42,24 +42,23 @@ function fetchDeck(deckTitle){
 
 //this "flips" the flash card by hiding one side and showing the other
 function flipFlash() {
-  var aside = document.getElementById("aside");
-  var bside = document.getElementById("bside");
-  if (aside.style.display === "none") {
-    aside.style.display = "block";
-    bside.style.display = "none";
-  } else {
-    aside.style.display = "none";
-    bside.style.display = "block";
-  }
+  var card = document.getElementById("flashcard");
+  card.classList.toggle('is-flipped');
   
 }
 
+// const card = document.querySelector('.card');
+// const buttons = document.querySelectorAll('button')
+// buttons.forEach(button => {
+//   button.addEventListener('click', () => card.classList.toggle('is-flipped'))
+// });
+
 
 // cheap way to link to bookstack on port 8080 when I have it running, though there is much better eways to do this. 
-function bookstack(){
-  window.location.href = "http://localhost:8080";
+// function bookstack(){
+//   window.location.href = "http://localhost:8080";
 
-}
+// }
 
 
 

@@ -1,0 +1,17 @@
+{% extends "base.html" %} {% block title %}Kwik Flash{% endblock %} 
+{% block content %}
+<h1 align="center">Manage Decks </h1>
+
+  <br>
+
+      <div class="user_control">
+        {% for deck in user.decks %}
+        <textarea>{{ deck.title }}</textarea>
+        {% endfor %}
+        <!-- <div class="menu_buttons" onclick="location.href='/' ">Manage Decks</div> -->
+      </div>
+        
+
+
+
+  {% endblock %}
