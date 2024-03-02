@@ -1,17 +1,13 @@
 {% extends "base.html" %} {% block title %}Kwik Flash{% endblock %} 
 {% block content %}
-<h1 align="center">Manage Decks </h1>
-
+<h1 align="center">Manage Kwik Decks </h1>
+<hr style="height:2px;border-width:0;color:gray;background-color:gray">
   <br>
-
-      <div class="user_control">
-        {% for deck in user.decks %}
-        <textarea>{{ deck.title }}</textarea>
-        {% endfor %}
+    <div class="menu_grid">
+      {% for deck in user.decks %}
+        <div class="menu_buttons"  onclick="location.href='/managesingledeck/{{deck.title}}' ">{{deck.title}}</div>
+      {% endfor %}
+        <div class="menu_buttons"  onclick="location.href='/createDeck' ">Create New Kwik Deck</div>
         <!-- <div class="menu_buttons" onclick="location.href='/' ">Manage Decks</div> -->
-      </div>
-        
-
-
-
+    </div>
   {% endblock %}

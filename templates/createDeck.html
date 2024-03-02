@@ -1,0 +1,31 @@
+{% extends "base.html" %} {% block title %}Kwik Flash{% endblock %} 
+{% block content %}
+<!-- <body onload="deck_title_popup()"> -->
+<h1 align="center" >Create new Kwik Deck</h1>
+<hr style="height:2px;border-width:0;color:gray;background-color:gray">
+    <form method="POST"> 
+        <!-- Put this in base.html -->
+        <!-- {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+                <div class="{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endwith %} -->
+        <textarea class="deck_title" name="deck_title" align="center" placeholder="Enter Kwik Deck title here"></textarea>
+        <br>
+        <h4 align="center">Create first Kwik Flash</h4>
+        <div class="deck_grid">
+            <textarea class="header" name="f_title" placeholder="Enter title here"></textarea>
+            <div class="edit">Edit</div> 
+            <textarea class="grid_main_textarea left" name="f_front" placeholder="Enter front data here"></textarea>
+            <textarea class="grid_main_textarea right" name="f_back" placeholder="Enter back data here"></textarea>
+        </div>
+        <br>
+        <div align="center"  >
+            <button type="reset" class="btn btn-primary">Clear</button>
+            <button id="add" type="submit" class="btn btn-primary" >Create</button>
+        </div>
+    </form> 
+</body>
+
+
+  {% endblock %}

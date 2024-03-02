@@ -1,0 +1,11 @@
+{% extends "base.html" %} {% block title %}Kwik Flash{% endblock %} 
+{% block content %}
+<h1 align="center">Pick Kwik Decks </h1>
+<hr style="height:2px;border-width:0;color:gray;background-color:gray">
+  <br>
+    <div class="menu_grid">
+      {% for deck in user.decks %}
+        <div class="menu_buttons"  onclick="location.href='/study_deck/{{deck.title}}' ">{{deck.title}}</div>
+      {% endfor %}
+    </div>
+  {% endblock %}

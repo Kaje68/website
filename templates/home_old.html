@@ -1,0 +1,57 @@
+
+{% extends "base.html" %} {% block title %}KwikFlash{% endblock %} 
+    {% block content %}
+    <h1 align="center">Kwik Flash cards</h1>
+    <ul class="list-group list-group-flush" id="flashcards">
+      <!-- good way to set variables "{% set var = "value" %}" -->
+      {% for deck in user.decks %}
+      <li class="list-group-item" >
+        <button type="button" class="btn" onClick="fetchDeck('{{ deck.title}}')">{{ deck.title }}</button>
+        <button type="button" class="close" onClick="deleteDeck('{{ deck.title }}')">Delete</button> <!--extra quotes need around d.t to evaluate as string -->
+          <ul>
+            <div id="{{deck.title}}" style="display: block;">
+              {% for flashcard in deck.flashcards %}
+                <li >
+                  <button type="button" class="btn" onClick="fetchFlash({{ flashcard.id }})">{{ flashcard.title }}</button>
+                  <button type="button" class="close" onClick="deleteFlash({{ flashcard.id }})">Delete</button>
+                  <!-- <span aria-hidden="true">&times;</span> -->
+                </li>
+              {% endfor %}
+            </div>
+          </ul>
+         <!-- <span aria-hidden="true">&times;</span> -->
+      </li>
+      {% endfor %}
+      <ul>
+        {% for flashcard in user.flashcards %} <!--this is to track flashcards that don't have a parent deck -->
+          <button type="button" class="btn" onClick="deleteFlash({{ flashcard.id }})">{{ flashcard.title }}</button>
+          
+        {% endfor %}
+
+      </ul>
+      
+    <form method="POST">
+      <div align="center"  >
+        <textarea name="deck_title" id="deck_title" class="important" rows="1" cols="30" placeholder="Deck title required">{{ deck_title }}</textarea>
+        <textarea name="flash_title" id="flash_title" class="important" rows="1" cols="30" placeholder="Flashcard title required">{{ flash_title }}</textarea>
+        <br />
+        <div class="scene"> <!--  little confused why this is needed but reddit griffin is helping, check bookstack for more notes-->
+          <div class="flashcard" id="flashcard">
+            <div class="card_face front">
+              <textarea name="f_front" placeholder="Front text rquired" >{{ f_front }}</textarea>
+              <button id="flipa" type="button" class=" btn btn-primary" onclick="flipFlash()">Flip</button>
+            </div>
+            <div class="card_face back">
+              <textarea  name="f_back" placeholder="Back text rquired" >{{ f_back }}</textarea>
+              <button id="flipa" type="button" class="btn btn-primary" onclick="flipFlash()">Flip</button>
+            </div>
+          </div>
+        </div>
+        <br />
+        <button type="reset" class="btn btn-primary">Clear</button>
+        <!-- <button id="flip" type="button" class="btn btn-primary" onclick="myFunction()">Flip</button> -->
+        <button id="add" type="submit" class="btn btn-primary" >Add to Deck</button>
+      </div>
+    </form>
+
+    {% endblock %}

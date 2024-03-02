@@ -1,0 +1,43 @@
+{% extends "base.html" %} {% block title %}Kwik Flash{% endblock %} 
+{% block content %}
+<div id="deckheader">
+    <h1 class="deckheader_title">{{deck.title}} </h1>
+    <button class="deckheader_button"  onClick="deleteDeck('{{ deck.title }}')">Delete</button> 
+
+</div>
+
+<hr style="height:2px;border-width:0;color:gray;background-color:gray">
+
+  <br>
+    {% for flashcard in deck.flashcards  %}
+     
+        <div class="deck_grid">
+            <textarea class="header" >{{flashcard.title}}</textarea>
+            <!-- <div class="del">Delete</div>  -->
+            <div class="edit">Edit</div> 
+            <textarea class="grid_main_textarea left">{{flashcard.data}}</textarea>
+            <textarea class="grid_main_textarea right">{{flashcard.data2}}</textarea>
+        </div>
+        <br>
+    {% endfor %}
+    <form method="POST"> 
+        <br>
+        <h4 align="center">Add New Kwik Flash </h4>
+        <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+        <br>
+        <div class="deck_grid">
+            <textarea class="header" name="f_title" placeholder="Enter title here"></textarea>
+            <div class="edit">Edit</div> 
+            <textarea class="grid_main_textarea left" name="f_front" placeholder="Enter front data here"></textarea>
+            <textarea class="grid_main_textarea right" name="f_back" placeholder="Enter back data here"></textarea>
+        </div>
+        <br>
+        <div align="center"  >
+            <button type="reset" class="btn btn-primary">Clear</button>
+            <button id="add" type="submit" class="btn btn-primary" >Add to Deck</button>
+        </div>
+    </form>
+
+
+
+  {% endblock %}
