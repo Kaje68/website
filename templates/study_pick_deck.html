@@ -5,7 +5,7 @@
   <br>
     <div class="menu_grid">
       {% for deck in user.decks %}
-        <div class="menu_buttons"  onclick="location.href='/study_deck/{{deck.title}}' ">{{deck.title}}</div>
+        <div class="menu_buttons"  onclick="location.href='/study_deck/{{deck.title}}_0' ">{{deck.title}}</div>
       {% endfor %}
     </div>
   {% endblock %}

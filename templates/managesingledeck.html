@@ -3,6 +3,7 @@
 <div id="deckheader">
     <h1 class="deckheader_title">{{deck.title}} </h1>
     <button class="deckheader_button"  onClick="deleteDeck('{{ deck.title }}')">Delete</button> 
+    <button class="deckheader_button"  onclick="location.href='/make_public/{{deck.title}}' ">Make public</button> 
 
 </div>
 

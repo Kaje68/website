@@ -8,19 +8,36 @@
 <hr style="height:2px;border-width:0;color:gray;background-color:gray">
 
   <br>
-    {% for flashcard in deck.flashcards  %}
+ 
+  
     <div class="scene" align="center">
+      <h6 >click anywhere to flip to flip</h6>
+        <!-- <p>Right arrow: <i class="arrow right"></i></p> -->
         <div class="flashcard" id="flashcard">
-          <div class="card_face front" >
-            <textarea name="f_front" placeholder="Front text rquired" >{{flashcard.data}}</textarea>
-            <button type="button" class=" btn btn-primary" onclick="flipFlash()">Flip</button>
+          <div class="card_face front" onclick="flipFlash()" >
+            <textarea readonly name="f_front" placeholder="Front text rquired" >{{flashcard.data}}</textarea>
+            <!-- <button type="button" class=" btn btn-primary" onclick="flipFlash()">Flip</button> -->
           </div>
-          <div class="card_face back">
-            <textarea  name="f_back" placeholder="Back text rquired" >{{deck.flashcards[0]}}</textarea>
-            <button  type="button" class="btn btn-primary" onclick="flipFlash()">Flip</button>
+          <div class="card_face back" onclick="flipFlash()">
+            <textarea readonly name="f_back" placeholder="Back text rquired" >{{flashcard.data2}}</textarea>
+            <!-- <button  type="button" class="btn btn-primary" onclick="flipFlash()">Flip</button> -->
           </div>
         </div>
+        <br><br><br>
+        <a href="/study_deck/{{deck.title}}_{{pos - 1}}">
+            <span class="circle_container c_left"></span>
+        </a>
+        <span class="deck_position">{{pos+1}}/{{length}}</span>
+        
+        <!-- <button type="button" class="circle btn-primary" onclick="flipFlash()"></button> -->
+        <a href="/study_deck/{{deck.title}}_{{pos + 1}}">
+            <span class="circle_container c_right"></span>
+        </a>
+       
+        
       </div>
+      <!-- <img src="https://d17usxoyp786nd.cloudfront.net/web_imgs/Next.png" alt="flip"> -->
+      
      
         <!-- <div class="deck_grid">
             <textarea class="header" >{{flashcard.title}}</textarea>
@@ -29,7 +46,8 @@
             <textarea class="grid_main_textarea right">{{flashcard.data2}}</textarea>
         </div>
         <br> -->
-    {% endfor %}
+        <!-- {% for flashcard in deck.flashcards  %} -->
+    <!-- {% endfor %} -->
     <!-- <form method="POST"> 
         <br>
         <h4 align="center">Add New Kwik Flash </h4>

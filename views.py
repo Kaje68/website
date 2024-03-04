@@ -31,13 +31,24 @@ def study_pick_deck():
     return render_template("study_pick_deck.html", user = current_user)
 
 
-@views.route('/study_deck/<deckTitle>', methods=['GET'])
-def study_deck(deckTitle):
+@views.route('/study_deck/<deckTitle>_<pos>', methods=['GET'])
+def study_deck(deckTitle, pos):
     deck = Deck.query.get(deckTitle)
+    # print(ctrl)
+    print(pos)
+    
+    length = len(deck.flashcards)
+    new_pos = int(pos) % length
+    # if int(ctrl) == 1:
+    #     new_pos = int(pos) % len(deck.flashcards)
+    #     print(new_pos)
+
+    kwikflash_current = deck.flashcards[new_pos]
+
     # print(deck)
     # print(len(deck.flashcards))
     print(request.endpoint)
-    return render_template("study_deck.html", user = current_user, deck = deck)
+    return render_template("study_deck.html", user = current_user, deck = deck, flashcard = kwikflash_current, pos = new_pos, length = length)
 
 
 
@@ -76,7 +87,15 @@ def managesingledeck(deckTitle):
    
 
     return render_template("managesingledeck.html", user = current_user, deck = deck)
+@views.route('/make_public/<deck_title>')
+def make_public(deck_title):
+    deck = deck = Deck.query.get(deck_title)
+    print(deck.user)
+    print(deck.user_id)
+    redirect_url = "/managesingledeck/" + deck_title
+    flash("This doesn't work yet", category = "error")
 
+    return redirect(redirect_url)
 
 @views.route('/createDeck/', methods=['POST', 'GET'])
 def createDeck():
